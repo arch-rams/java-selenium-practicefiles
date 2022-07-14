@@ -1,0 +1,45 @@
+Configure Android Studio
+
+
+Android Studio provides wizards and templates that verify your system requirements, such as the Java Development Kit (JDK) and available RAM, and configure default settings, such as an optimized default Android Virtual Device (AVD) emulation and updated system images. This document describes additional configuration settings you may want to use to customize your use of Android Studio.
+Android Studio provides access to two configuration files through the Help menu :
+
+Find your configuration files
+Both configuration files are stored in the configuration folder for Android Studio. The name of the folder depends on your Studio version. Here are the locations for Android Studio 4.1 and higher:
+Windows
+Syntax:%APPDATA%\Google\<product><version>
+Example:C:\Users\YourUserName\AppData\Roaming\Google\AndroidStudio4.1
+macOS
+Syntax:~/Library/Application Support/Google/<product><version>
+Example:~/Library/Application Support/Google/AndroidStudio4.1
+Linux
+Syntax:~/.config/Google/<product><version>
+Example:~/.config/Google/AndroidStudio4.1
+For Android Studio versions 4.0 and lower, configuration files are located in the following locations:
+* Windows:%USERPROFILE%\.CONFIGURATION_FOLDER
+* macOS:~/Library/Preferences/CONFIGURATION_FOLDER
+* Linux:~/.CONFIGURATION_FOLDER
+Note:An easy way to locate your configuration directory is to navigate toHelp > Edit Custom VM Optionsin Android Studio. This will open a configuration file. Inspect the path of the configuration file to find your configuration directory.
+You can also use the following environment variables to point to specific override files elsewhere:
+* STUDIO_VM_OPTIONS: set the name and location of the.vmoptionsfile
+* STUDIO_PROPERTIES: set the name and location of the.propertiesfile
+* STUDIO_JDK: set the JDK with which to run Studio
+Customize your VM options
+Thestudio.vmoptionsfile allows you to customize options for Android Studio's JVM. To improve Studio's performance, the most common option to adjust is the maximum heap size, but you can also use thestudio.vmoptionsfile to override other default settings such as initial heap size, cache size, and Java garbage collection switches.
+To create a newstudio.vmoptionsfile or to open your existing one, use the following steps:
+1. ClickHelp>Edit Custom VM Options. If you have never edited VM options for Android Studio before, the IDE prompts you to create a newstudio.vmoptionsfile. ClickYesto create the file.
+2. Thestudio.vmoptionsfile opens in the editor window of Android Studio. Edit the file to add your own customized VM options. For a full list of customizable JVM options, see Oracle’s
+Thestudio.vmoptionsfile you create gets added to the defaultstudio.vmoptionsfile, located in thebin/directory inside your Android Studio installation folder.
+Note that you should never directly edit thestudio.vmoptionsfile found inside the Android Studio program folder. While you can access the file to view Studio's default VM options, editing only your ownstudio.vmoptionsfile ensures that you don't override important default settings for Android Studio. Therefore, in yourstudio.vmoptionsfile, override only the attributes you care about and allow Android Studio to continue using default values for any attributes you have not changed.
+Maximum heap size
+By default, Android Studio has a maximum heap size of 1280MB. If you are working on a large project, or your system has a lot of RAM, you can improve performance by increasing the maximum heap size for Android Studio processes, such as the core IDE, Gradle daemon, and Kotlin daemon.
+Android Studio automatically checks for possible heap size optimizations and notifies you if it detects that performance can be improved.
+
+Figure 1.A notification about recommended memory settings.
+
+If you use a 64-bit system that has at least 5 GB of RAM, you can also adjust the heap sizes for your project manually. To do so, follow these steps:
+1. ClickFile > Settingsfrom the menu bar (orAndroid Studio > Preferenceson macOS).
+2. ClickAppearance & Behavior > System Settings > Memory Settings.
+
+1. Adjust the heap sizes to match your desired amounts.
+2. ClickApply. If you changed the heap size for the IDE, you must restart Android Studio before the new memory settings are applied.
