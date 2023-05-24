@@ -23,12 +23,15 @@ import static selenium.LangSpecificLocators.LocatorByLang.COMPARERATES;
 public class SafariBrowserIssueTest {
     public static WebDriver driver;
     private static final By BTN_COMPARERATES =
-             By.xpath("//span[text()='Tarife vergleichen']");
-           // By.xpath("//span[text()='" + COMPARERATES.getByLang() + "']");
+           //  By.xpath("//span[text()='Tarife vergleichen']");
+            By.xpath("//span[text()='" + COMPARERATES.getByLang() + "']");
     private static final By TEXTBOX_FROMFIELD =
             By.xpath("//div[@data-selector = 'fromAddress']//input");
     private static final By FIELD_FROMADDR = By.xpath("//div[@data-selector = 'fromAddress']");
     private static final By BTN_EDITBOX = By.xpath("(//div[@class='q-tab__label'])[2]");
+    private static final By TABFIELD_EDITADDR =
+            By.xpath("//div[text()='Edit address']/ancestor::div[@role='tab']");
+           // By.xpath("//div[@class='q-tab__label'][text()='Edit address']");
     private static final By FIELD_TOADDR = By.xpath("//div[@data-selector='toAddress']");
     private static final By TEXTBOX_TOFIELD = By.xpath("//div[@data-selector = 'toAddress']//input");
     private static final By BTN_ACCEPTCOOKIE =
@@ -50,18 +53,45 @@ public class SafariBrowserIssueTest {
     @Test(priority=0)
     public void commonTests() throws InterruptedException {
        driver.findElement(BTN_ACCEPTCOOKIE).click();
-        Thread.sleep(3000);
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+    }
+
+    @Test(enabled = false)
+    public void enterSCCFromUsingEdit() throws InterruptedException {
+
+        driver.findElement(BTN_COMPARERATES).click();
+        Uninterruptibles.sleepUninterruptibly(10, TimeUnit.SECONDS);
+        driver.findElement(FIELD_FROMADDR).click();
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+        //driver.findElement(TEXTBOX_FROMFIELD).sendKeys("united kingdom");
+        driver.findElement(TABFIELD_EDITADDR).click();
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+       // driver.findElement(TEXTBOX_FROMFIELD).sendKeys("usa");
+        driver.findElement(FIELD_COUNTRYDROPDWN).click();
+        Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
+
+        driver.findElement(TXTBOX_COUNTRY).clear();
+        driver.findElement(TXTBOX_COUNTRY).sendKeys("usa");
+        Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//div[contains(@class,'q-item__section')]/span[text()='USA']")).click();
+        Uninterruptibles.sleepUninterruptibly(4,TimeUnit.SECONDS);
+        driver.findElement(BTN_DONE).click();
+        Uninterruptibles.sleepUninterruptibly(5, TimeUnit.SECONDS);
+
     }
 
     @Test(enabled = true)
     public void enterFromUsingEdit() throws InterruptedException {
+
         driver.findElement(FIELD_FROMADDR).click();
         Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
         //driver.findElement(TEXTBOX_FROMFIELD).sendKeys("united kingdom");
-        driver.findElement(BTN_EDITBOX).click();
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView();", driver.findElement(FIELD_COUNTRYDROPDWN));
-        Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
+        driver.findElement(TABFIELD_EDITADDR).click();
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+       // driver.findElement(TEXTBOX_FROMFIELD).sendKeys("usa");
+      // ((JavascriptExecutor) driver)
+        //        .executeScript("arguments[0].scrollIntoView();", driver.findElement(FIELD_COUNTRYDROPDWN));
+      //  Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
         driver.findElement(FIELD_COUNTRYDROPDWN).click();
         Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
 
@@ -77,9 +107,36 @@ public class SafariBrowserIssueTest {
 */
         Uninterruptibles.sleepUninterruptibly(4,TimeUnit.SECONDS);
         driver.findElement(BTN_DONE).click();
+
+        driver.findElement(FIELD_TOADDR).click();
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+        //driver.findElement(TEXTBOX_FROMFIELD).sendKeys("united kingdom");
+        driver.findElement(TABFIELD_EDITADDR).click();
+        Uninterruptibles.sleepUninterruptibly(4, TimeUnit.SECONDS);
+        // driver.findElement(TEXTBOX_FROMFIELD).sendKeys("usa");
+        // ((JavascriptExecutor) driver)
+        //        .executeScript("arguments[0].scrollIntoView();", driver.findElement(FIELD_COUNTRYDROPDWN));
+        //  Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
+        driver.findElement(FIELD_COUNTRYDROPDWN).click();
+        Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
+
+        driver.findElement(TXTBOX_COUNTRY).clear();
+        driver.findElement(TXTBOX_COUNTRY).sendKeys("germany");
+        Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//div[contains(@class,'q-item__section')]/span[text()='Germany']")).click();
+/*
+
+        Actions action = new Actions(driver);
+        WebElement searchresult = driver.findElement(By.xpath("//input[@type='search']"));
+        action.click(searchresult);
+*/
+        Uninterruptibles.sleepUninterruptibly(4,TimeUnit.SECONDS);
+        driver.findElement(BTN_DONE).click();
+
         Uninterruptibles.sleepUninterruptibly(5, TimeUnit.SECONDS);
         driver.findElement(BTN_COMPARERATES).click();
         Uninterruptibles.sleepUninterruptibly(10, TimeUnit.SECONDS);
+
     }
 
     @Test(enabled = false)

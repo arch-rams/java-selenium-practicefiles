@@ -19,6 +19,13 @@
     </properties>
 <dependencies>
 
+    <!-- https://mvnrepository.com/artifact/com.typesafe.play/play-mailer -->
+    <dependency>
+        <groupId>com.typesafe.play</groupId>
+        <artifactId>play-mailer_2.12</artifactId>
+        <version>8.0.1</version>
+    </dependency>
+
     <dependency>
         <groupId>org.testng</groupId>
         <artifactId>testng</artifactId>

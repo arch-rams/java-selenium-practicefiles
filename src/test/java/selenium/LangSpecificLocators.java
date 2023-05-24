@@ -20,7 +20,7 @@ public class LangSpecificLocators {
         WEIGHT("Gewicht (kg)", "Weight (kg)"),
         WIDTH("B", "W"),
 
-        COMPARERATES("Tarife vergleichen", "Tarife vergleichen"),
+        COMPARERATES("Tarife vergleichen", "Compare rates"),
 
         CONTINUE2("Fortsetzen", "Continue"),
         CONTINUE("Weiter", "Continue"),
